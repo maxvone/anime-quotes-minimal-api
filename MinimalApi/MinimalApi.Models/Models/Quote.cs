@@ -3,6 +3,6 @@
 	public class Quote
 	{
 		public int QuoteId { get; set; }
-		public string? QuoteContent { get; set; }
+		public required string QuoteContent { get; set; }
 	}
 }
