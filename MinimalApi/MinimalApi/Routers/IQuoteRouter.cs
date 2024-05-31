@@ -2,6 +2,8 @@
 {
 	public interface IQuoteRouter
 	{
-		public void AddRoutes(WebApplication app);
+		string? UrlFragment { get; }
+
+		void AddRoutes(WebApplication app);
 	}
 }

@@ -11,8 +11,8 @@ using MinimalApi.DataAccess.Data;
 namespace MinimalApi.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240525121357_AddAuthorTable")]
-    partial class AddAuthorTable
+    [Migration("20240530113246_NullableValuesIssueFix")]
+    partial class NullableValuesIssueFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,57 +26,51 @@ namespace MinimalApi.DataAccess.Migrations
 
             modelBuilder.Entity("MinimalApi.Models.Models.Quote", b =>
                 {
-                    b.Property<int>("QuoteId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuoteId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("QuoteAuthorId")
+                    b.Property<int?>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<string>("QuoteContent")
-                        .IsRequired()
+                    b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("QuoteId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("QuoteAuthorId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Quotes");
                 });
 
             modelBuilder.Entity("MinimalApi.Models.Models.QuoteAuthor", b =>
                 {
-                    b.Property<int>("QuoteAuthorId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("QuoteAuthorId"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("AnimeName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("QuoteAuthorId");
+                    b.HasKey("Id");
 
                     b.ToTable("Authors");
                 });
 
             modelBuilder.Entity("MinimalApi.Models.Models.Quote", b =>
                 {
-                    b.HasOne("MinimalApi.Models.Models.QuoteAuthor", null)
-                        .WithMany("Quotes")
-                        .HasForeignKey("QuoteAuthorId");
-                });
+                    b.HasOne("MinimalApi.Models.Models.QuoteAuthor", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
 
-            modelBuilder.Entity("MinimalApi.Models.Models.QuoteAuthor", b =>
-                {
-                    b.Navigation("Quotes");
+                    b.Navigation("Author");
                 });
 #pragma warning restore 612, 618
         }

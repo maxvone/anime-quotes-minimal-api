@@ -2,7 +2,9 @@
 {
 	public class Quote
 	{
-		public int QuoteId { get; set; }
-		public required string QuoteContent { get; set; }
+		public int Id { get; set; }
+		public string? Content { get; set; }
+		public int AuthorId { get; set; }
+		public QuoteAuthor Author { get; set; }
 	}
 }
