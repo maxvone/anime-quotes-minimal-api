@@ -57,7 +57,6 @@ namespace MinimalApi.Routers
 
         public void AddRoutes(WebApplication app)
 		{
-
 			RouteGroupBuilder group = app.MapGroup("/" + UrlFragment).WithTags("Quotes");
 
 			group.MapGet("/", async () => await GetAllQuotes())

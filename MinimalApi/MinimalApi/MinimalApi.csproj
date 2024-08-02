@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MinimalApi.DataAccess\MinimalApi.DataAccess.csproj" />
+    <ProjectReference Include="..\MinimalApi.Utility\MinimalApi.Utility.csproj" />
   </ItemGroup>
 
 </Project>
